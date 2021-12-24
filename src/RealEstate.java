@@ -6,6 +6,11 @@ public class RealEstate {
     private Property[] properties;
     private Address[] addresses;
 
+    public RealEstate(){
+        this.users=new User[0];
+
+    }
+
     public void createUser(){
         Scanner scanner=new Scanner(System.in);
         String username=null;
@@ -41,7 +46,7 @@ public class RealEstate {
             if (choose==1){
                 isRealEstate=true;
             }else {isRealEstate=false;}
-        }while (choose==1||choose==2);
+        }while (choose!=1&&choose!=2);
         addUserToArray(username,password,phoneNumber,isRealEstate);
 
     }
@@ -92,12 +97,16 @@ public class RealEstate {
 
     private boolean isUsernameExist(String username){
         boolean exist=false;
-        for (int i=0;i<this.users.length;i++){
-            User currentUser=this.users[i];
-            if (currentUser.getUsername().equals(username)){
-                exist=true;
-                break;
+        if (this.users.length>0) {
+            for (int i = 0; i < this.users.length; i++) {
+                User currentUser = this.users[i];
+                if (currentUser.getUsername().equals(username)) {
+                    exist = true;
+                    break;
+                }
             }
+        }else{
+            exist=false;
         }
         return exist;
     }
