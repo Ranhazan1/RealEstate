@@ -111,5 +111,21 @@ public class RealEstate {
         }
         return exist;
     }
+    public User login() {
+        User user = new User(null,null,null,false);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("enter your username:");
+        String username = scanner.nextLine();
+        System.out.println("enter your password:");
+        String password= scanner.nextLine();
+        for (int i = 0; i < users.length; i++) {
+            String checkUsername = users[i].getUsername();
+            String checkPassword = users[i].getPassword();
+            if (username.equals(checkUsername) && password.equals(checkPassword)) {
+                user = users[i];
+                return user;
+            }
+        }return null;
+    }
 
 }
