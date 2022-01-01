@@ -14,6 +14,9 @@ public class Main {
                 user = r1.login();
                 if (user != null) {
                  number=printMenu2();
+                 if (number==1){
+                     r1.postNewProperty(user);
+                 }
 
                 }
             } else {

@@ -1,4 +1,3 @@
-import javax.jws.soap.SOAPBinding;
 import java.util.Scanner;
 
 public class RealEstate {
@@ -9,7 +8,10 @@ public class RealEstate {
     public RealEstate(){
         this.users=new User[0];
         this.properties=new Property[0];
-        this.addresses=new Address[0];
+        this.addresses=new Address[10];
+        addresses[0].setCity("tel aviv");
+        addresses[0].setStreet("dizingof");
+
     }
 
     public void createUser(){
@@ -127,5 +129,48 @@ public class RealEstate {
             }
         }return null;
     }
-
+    public boolean postNewProperty(User user){
+        boolean isUserCanPublish=false;
+        int userPropertiesAmount=3;
+        if (user.getIsRealEstate()){
+            userPropertiesAmount=10;
+        }if (properties.length<=userPropertiesAmount){
+            isUserCanPublish=true;
+        }if (isUserCanPublish){
+            String[] citiesToPrint=new String[10];
+            citiesToPrint[0]= addresses[0].getCity();
+            for (int i = 1; i< addresses.length; i++){
+                for (int j = 1; j< addresses.length; j++){
+                    if (!addresses[i].equals(citiesToPrint[j])){
+                        citiesToPrint[j]= addresses[i].getCity();
+                    }
+                }
+            }for (int i=0;i<citiesToPrint.length;i++){
+                if (citiesToPrint[i]!=null){
+                    System.out.println(citiesToPrint[i]);
+                }
+            }
+        }return isUserCanPublish;
+    }
+//(Address[] arrayOffAddresses=new Address[10];
+    //arrayOffAddresses[0].setCity("tel aviv");
+   // arrayOffAddresses[0].setStreet("herzel street");
+   // arrayOffAddresses[1].setCity("tel aviv");
+   // arrayOffAddresses[1].setStreet("arlozorov street");
+//    arrayOffAddresses[2].setCity("tel aviv");
+  //  arrayOffAddresses[2].setStreet("dizingof street");
+  //  arrayOffAddresses[3].setCity("tel aviv");
+  //  arrayOffAddresses[3].setStreet("ben gurion street");
+   // arrayOffAddresses[4].setCity("jerusalem");
+    //arrayOffAddresses[4].setStreet("king david street");
+    //arrayOffAddresses[5].setCity("jerusalem");
+    //arrayOffAddresses[5].setStreet("ben gurion street");
+    //arrayOffAddresses[6].setCity("jerusalem");
+    //arrayOffAddresses[6].setStreet("hillel street");
+    //arrayOffAddresses[7].setCity("jerusalem");
+    //arrayOffAddresses[7].setStreet("bar ilan street");
+    //arrayOffAddresses[8].setCity("ashkelon");
+    //arrayOffAddresses[8].setStreet("itzhak ben tzvi");
+    //arrayOffAddresses[9].setCity("ashkelon street");
+    //arrayOffAddresses[9].setStreet("herzel street");)
 }
