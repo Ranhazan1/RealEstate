@@ -9,9 +9,16 @@ public class RealEstate {
         this.users=new User[0];
         this.properties=new Property[0];
         this.addresses=new Address[10];
-        addresses[0].setCity("tel aviv");
-        addresses[0].setStreet("dizingof");
-
+        this.addresses[0]=new Address("tel aviv","herzel street");
+        this.addresses[1]=new Address("tel aviv","arlozorov street");
+        this.addresses[2]=new Address("tel aviv","dizingof street");
+        this.addresses[3]=new Address("tel aviv","ben gurion street");
+        this.addresses[4]=new Address("jerusalem","king david street");
+        this.addresses[5]=new Address("jerusalem","ben gurion street");
+        this.addresses[6]=new Address("jerusalem","hillel street");
+        this.addresses[7]=new Address("jerusalem","bar ilan street");
+        this.addresses[8]=new Address("ashkelon","itzhak ben tzvi street");
+        this.addresses[9]=new Address("ashkelon","herzrel street");
     }
 
     public void createUser(){
@@ -130,6 +137,7 @@ public class RealEstate {
         }return null;
     }
     public boolean postNewProperty(User user){
+        Scanner scanner=new Scanner(System.in);
         boolean isUserCanPublish=false;
         int userPropertiesAmount=3;
         if (user.getIsRealEstate()){
@@ -137,40 +145,32 @@ public class RealEstate {
         }if (properties.length<=userPropertiesAmount){
             isUserCanPublish=true;
         }if (isUserCanPublish){
+            System.out.println("choose city ");
+            String userCity= scanner.nextLine();
             String[] citiesToPrint=new String[10];
-            citiesToPrint[0]= addresses[0].getCity();
-            for (int i = 1; i< addresses.length; i++){
-                for (int j = 1; j< addresses.length; j++){
-                    if (!addresses[i].equals(citiesToPrint[j])){
-                        citiesToPrint[j]= addresses[i].getCity();
+            for (int i=0;i<addresses.length;i++){
+                citiesToPrint[i]=addresses[i].getCity();
+            }
+            for (int i=0;i<citiesToPrint.length;i++){
+                String city=citiesToPrint[i];
+                for (int j=0;j<citiesToPrint.length;j++){
+                    if (i==j){
+                        break;
+                    }else {
+                        if (city.equals(citiesToPrint[j])){
+                            citiesToPrint[i]=null;
+                        }
                     }
                 }
             }for (int i=0;i<citiesToPrint.length;i++){
                 if (citiesToPrint[i]!=null){
                     System.out.println(citiesToPrint[i]);
                 }
+            }for (int i=0;i<citiesToPrint.length;i++){
+                if (userCity.equals(citiesToPrint[i])){
+
+                }
             }
         }return isUserCanPublish;
     }
-//(Address[] arrayOffAddresses=new Address[10];
-    //arrayOffAddresses[0].setCity("tel aviv");
-   // arrayOffAddresses[0].setStreet("herzel street");
-   // arrayOffAddresses[1].setCity("tel aviv");
-   // arrayOffAddresses[1].setStreet("arlozorov street");
-//    arrayOffAddresses[2].setCity("tel aviv");
-  //  arrayOffAddresses[2].setStreet("dizingof street");
-  //  arrayOffAddresses[3].setCity("tel aviv");
-  //  arrayOffAddresses[3].setStreet("ben gurion street");
-   // arrayOffAddresses[4].setCity("jerusalem");
-    //arrayOffAddresses[4].setStreet("king david street");
-    //arrayOffAddresses[5].setCity("jerusalem");
-    //arrayOffAddresses[5].setStreet("ben gurion street");
-    //arrayOffAddresses[6].setCity("jerusalem");
-    //arrayOffAddresses[6].setStreet("hillel street");
-    //arrayOffAddresses[7].setCity("jerusalem");
-    //arrayOffAddresses[7].setStreet("bar ilan street");
-    //arrayOffAddresses[8].setCity("ashkelon");
-    //arrayOffAddresses[8].setStreet("itzhak ben tzvi");
-    //arrayOffAddresses[9].setCity("ashkelon street");
-    //arrayOffAddresses[9].setStreet("herzel street");)
 }

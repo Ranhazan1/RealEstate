@@ -2,7 +2,7 @@ public class Address {
     private String city;
     private String street;
 
-    private Address(String city,String street){
+    public Address(String city,String street){
         this.city=city;
         this.street=street;
     }
@@ -19,7 +19,7 @@ public class Address {
         this.street=street;
     }
     public String toString() {
-        return "city : " + this.city +
+        return "city: " + this.city +
                         "\n street: "+this.street;
 
     }
