@@ -8,7 +8,8 @@ public class RealEstate {
 
     public RealEstate(){
         this.users=new User[0];
-
+        this.properties=new Property[0];
+        this.addresses=new Address[0];
     }
 
     public void createUser(){
@@ -110,4 +111,5 @@ public class RealEstate {
         }
         return exist;
     }
+
 }

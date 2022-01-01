@@ -37,4 +37,10 @@ public class User {
     public void setRealEstate(boolean realEstate){
         this.isRealEstate=realEstate;
     }
+    public String toString(){
+        return "username: "+this.username+
+                "\npassword: "+this.password+
+                "\nphone number: "+this.phoneNumber+
+                "is real estate: "+this.isRealEstate;
+    }
 }

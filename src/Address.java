@@ -18,4 +18,9 @@ public class Address {
     public void setStreet(String street){
         this.street=street;
     }
+    public String toString() {
+        return "city : " + this.city +
+                        "\n street: "+this.street;
+
+    }
 }
