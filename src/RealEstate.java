@@ -9,16 +9,16 @@ public class RealEstate {
         this.users=new User[0];
         this.properties=new Property[0];
         this.addresses=new Address[10];
-        this.addresses[0]=new Address("tel aviv","herzel street");
-        this.addresses[1]=new Address("tel aviv","arlozorov street");
-        this.addresses[2]=new Address("tel aviv","dizingof street");
-        this.addresses[3]=new Address("tel aviv","ben gurion street");
-        this.addresses[4]=new Address("jerusalem","king david street");
-        this.addresses[5]=new Address("jerusalem","ben gurion street");
-        this.addresses[6]=new Address("jerusalem","hillel street");
-        this.addresses[7]=new Address("jerusalem","bar ilan street");
-        this.addresses[8]=new Address("ashkelon","itzhak ben tzvi street");
-        this.addresses[9]=new Address("ashkelon","herzrel street");
+        this.addresses[0]=new Address("tel aviv","herzel");
+        this.addresses[1]=new Address("tel aviv","arlozorov");
+        this.addresses[2]=new Address("tel aviv","dizingof");
+        this.addresses[3]=new Address("tel aviv","ben gurion");
+        this.addresses[4]=new Address("jerusalem","king david");
+        this.addresses[5]=new Address("jerusalem","ben gurion");
+        this.addresses[6]=new Address("jerusalem","hillel");
+        this.addresses[7]=new Address("jerusalem","bar ilan");
+        this.addresses[8]=new Address("ashkelon","itzhak ben tzvi");
+        this.addresses[9]=new Address("ashkelon","herzrel");
     }
 
     public void createUser(){
@@ -137,40 +137,86 @@ public class RealEstate {
         }return null;
     }
     public boolean postNewProperty(User user){
-        Scanner scanner=new Scanner(System.in);
         boolean isUserCanPublish=false;
+        boolean chooseCity=false;
+        boolean chooseStreet=false;
         int userPropertiesAmount=3;
         if (user.getIsRealEstate()){
             userPropertiesAmount=10;
         }if (properties.length<=userPropertiesAmount){
             isUserCanPublish=true;
-        }if (isUserCanPublish){
-            System.out.println("choose city ");
-            String userCity= scanner.nextLine();
-            String[] citiesToPrint=new String[10];
-            for (int i=0;i<addresses.length;i++){
-                citiesToPrint[i]=addresses[i].getCity();
-            }
-            for (int i=0;i<citiesToPrint.length;i++){
-                String city=citiesToPrint[i];
-                for (int j=0;j<citiesToPrint.length;j++){
-                    if (i==j){
-                        break;
-                    }else {
-                        if (city.equals(citiesToPrint[j])){
-                            citiesToPrint[i]=null;
-                        }
-                    }
-                }
-            }for (int i=0;i<citiesToPrint.length;i++){
-                if (citiesToPrint[i]!=null){
-                    System.out.println(citiesToPrint[i]);
-                }
-            }for (int i=0;i<citiesToPrint.length;i++){
-                if (userCity.equals(citiesToPrint[i])){
-
-                }
-            }
-        }return isUserCanPublish;
+        }String userCity=printCities(addresses);
+        if (userCity!=null){
+            chooseCity=true;
+        }
+        String userStreet=printStreets(userCity,addresses);
+        if (userStreet!=null){
+            chooseStreet=true;
+        }System.out.println(chooseCity);//delete******
+        System.out.println(chooseStreet);// delete***
+        return chooseCity;///delete***
     }
-}
+
+      public String printCities(Address[] addresses){
+          Scanner scanner=new Scanner(System.in);
+          boolean cityExist=false;
+          System.out.println("choose city: ");
+          String[] citiesToPrint = new String[10];
+          for (int i = 0; i < addresses.length; i++) {
+              citiesToPrint[i] = addresses[i].getCity();
+          }
+          for (int i = 0; i < citiesToPrint.length; i++) {
+              String city = citiesToPrint[i];
+              for (int j = 0; j < citiesToPrint.length; j++) {
+                  if (i == j) {
+                      break;
+                  } else {
+                      if (city.equals(citiesToPrint[j])) {
+                          citiesToPrint[i] = null;
+                      }
+                  }
+              }
+          }
+          for (int i = 0; i < citiesToPrint.length; i++) {
+              if (citiesToPrint[i] != null) {
+                  System.out.println(citiesToPrint[i]);
+              }
+          }
+          String userCity = scanner.nextLine();
+          for (int i=0;i<citiesToPrint.length;i++){
+              if (userCity.equals(citiesToPrint[i])){
+                  cityExist=true;
+                  break;
+              }
+          }if (!cityExist){
+              System.out.println("the city "+userCity+" dont exist in the system");
+              userCity=null;
+          }
+          return userCity;
+      }
+      public String printStreets(String city,Address[] addresses){
+        Scanner scanner=new Scanner(System.in);
+        boolean streetExists=false;
+          System.out.println("choose street: ");
+          String[] newStreetsArray=new String[addresses.length];
+          for (int i=0;i<newStreetsArray.length;i++){
+              if (city.equals(addresses[i].getCity())){
+                  newStreetsArray[i]=addresses[i].getStreet();
+              }
+          }for (int i=0;i<newStreetsArray.length;i++){
+              if (newStreetsArray[i]!=null){
+                  System.out.println(newStreetsArray[i]);
+              }
+          }String userStreet= scanner.nextLine();
+          for (int i=0;i<newStreetsArray.length;i++){
+              if (userStreet.equals(newStreetsArray[i])){
+                  streetExists=true;
+                  break;
+              }
+          }if (!streetExists){
+              System.out.println("the street "+userStreet+" dont exist in the system");
+              userStreet=null;
+          }
+          return userStreet;
+      }
+    }
