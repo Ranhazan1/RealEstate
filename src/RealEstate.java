@@ -1,3 +1,4 @@
+import javax.jws.soap.SOAPBinding;
 import java.util.Scanner;
 
 public class RealEstate {
@@ -137,6 +138,7 @@ public class RealEstate {
         }return null;
     }
     public boolean postNewProperty(User user){
+        boolean succeed=false;
         boolean isUserCanPublish=false;
         boolean chooseCity=false;
         boolean chooseStreet=false;
@@ -152,9 +154,23 @@ public class RealEstate {
         String userStreet=printStreets(userCity,addresses);
         if (userStreet!=null){
             chooseStreet=true;
-        }System.out.println(chooseCity);//delete******
-        System.out.println(chooseStreet);// delete***
-        return chooseCity;///delete***
+        }
+        if (isUserCanPublish&&chooseCity&&chooseStreet){
+            Address address=new Address(userCity,userStreet);
+            int type=propertyType();
+            int floorNumber=-1;
+            if (type==1){
+                floorNumber=floorNumber();
+            }
+            int roomNumber=roomNumber();
+            int propertyNumber=propertyNumber();
+            boolean forRent=forRent();
+            double price=propertyPrice();
+            addPropertyToArray(address,roomNumber,price,type,forRent,propertyNumber,floorNumber,user);
+            succeed=true;
+            System.out.println(properties[0]);//*********************************
+        }
+        return succeed;
     }
 
       public String printCities(Address[] addresses){
@@ -219,4 +235,61 @@ public class RealEstate {
           }
           return userStreet;
       }
+      public int propertyType(){
+        Scanner scanner=new Scanner(System.in);
+          int typeNUmber= 0;
+          while (typeNUmber>3||typeNUmber<1){
+              System.out.println("pick the type off the property"+
+                      "\n 1-regular apartment in building" +
+                      "\n 2-penthouse" +
+                      "\n 3- private house");
+              typeNUmber= scanner.nextInt();
+          }return typeNUmber;
+      }
+      public int roomNumber(){
+          Scanner scanner=new Scanner(System.in);
+          System.out.println("enter the number off rooms: ");
+          int roomNumber= scanner.nextInt();
+          return roomNumber;
+      }
+      public int floorNumber(){
+        Scanner scanner=new Scanner(System.in);
+          System.out.println("enter the floor number: ");
+        int floorNumber= scanner.nextInt();
+        return floorNumber;
+      }
+      public int propertyNumber(){
+        Scanner scanner=new Scanner(System.in);
+          System.out.println("enter the property number: ");
+          int propertyNumber= scanner.nextInt();
+          return propertyNumber;
+      }
+      public boolean forRent(){
+        boolean forRent=false;
+        Scanner scanner=new Scanner(System.in);
+        int number=0;
+        while (number>2||number<1){
+        System.out.println("do you want to rent orr sell?" +
+                "\n1-rent \n2-sell");
+        number=scanner.nextInt();
+        if (number==1) {
+            forRent = true;
+        }
+        }return forRent;
+    }
+    public double propertyPrice(){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("enter the price off the property :");
+        double price= scanner.nextDouble();
+        return price;
+    }
+    public void addPropertyToArray(Address address, int roomNumber, double price, int type, boolean forRent, int houseNumber
+    , int floorNumber, User user){
+        Property[] newPropertyArray=new Property[this.properties.length+1];
+        for (int i=0;i<properties.length;i++){
+            newPropertyArray[i]=this.properties[i];
+        }Property propertyToAdd=new Property(address,roomNumber,price,type,forRent,houseNumber,floorNumber,user);
+        newPropertyArray[this.properties.length]=propertyToAdd;
+        this.properties=newPropertyArray;
+    }
     }

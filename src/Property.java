@@ -1,14 +1,14 @@
 public class Property {
     private Address address;
     private int roomNumber;
-    private int price;
+    private double price;
     private int type;
     private boolean forRent;
     private int houseNumber;
     private int floorNumber;
     private User user;
 
-    public Property(Address address,int roomNumber, int price,int type, boolean forRent,int houseNumber,
+    public Property(Address address,int roomNumber, double price,int type, boolean forRent,int houseNumber,
                     int floorNumber, User user){
         this.address=address;
         this.roomNumber=roomNumber;
@@ -39,7 +39,7 @@ public class Property {
         this.roomNumber = roomNumber;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -96,7 +96,7 @@ public class Property {
         }else if (this.type==2){
             output.append("type: penthouse");
         }else {
-            output.append("type: private house");
+            output.append("type: private house").append("\n");
         }
         output.append("for rent: ").append(this.forRent).append("\n");
         output.append("house number: ").append(this.houseNumber).append("\n");

@@ -41,6 +41,6 @@ public class User {
         return "username: "+this.username+
                 "\npassword: "+this.password+
                 "\nphone number: "+this.phoneNumber+
-                "is real estate: "+this.isRealEstate;
+                "\nis real estate: "+this.isRealEstate;
     }
 }
