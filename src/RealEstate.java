@@ -145,30 +145,35 @@ public class RealEstate {
         int userPropertiesAmount=3;
         if (user.getIsRealEstate()){
             userPropertiesAmount=10;
-        }if (properties.length<=userPropertiesAmount){
+        }if (this.properties.length<userPropertiesAmount){
             isUserCanPublish=true;
-        }String userCity=printCities(addresses);
-        if (userCity!=null){
-            chooseCity=true;
         }
-        String userStreet=printStreets(userCity,addresses);
-        if (userStreet!=null){
-            chooseStreet=true;
-        }
-        if (isUserCanPublish&&chooseCity&&chooseStreet){
-            Address address=new Address(userCity,userStreet);
-            int type=propertyType();
-            int floorNumber=-1;
-            if (type==1){
-                floorNumber=floorNumber();
+        if (isUserCanPublish) {
+            String userCity = printCities(addresses);
+            if (userCity != null) {
+                chooseCity = true;
             }
-            int roomNumber=roomNumber();
-            int propertyNumber=propertyNumber();
-            boolean forRent=forRent();
-            double price=propertyPrice();
-            addPropertyToArray(address,roomNumber,price,type,forRent,propertyNumber,floorNumber,user);
-            succeed=true;
-            System.out.println(properties[0]);//*********************************
+            String userStreet = printStreets(userCity, addresses);
+            if (userStreet != null) {
+                chooseStreet = true;
+            }
+            if (chooseCity && chooseStreet) {
+                Address address = new Address(userCity, userStreet);
+                int type = propertyType();
+                int floorNumber = -1;
+                if (type == 1) {
+                    floorNumber = floorNumber();
+                }
+                int roomNumber = roomNumber();
+                int propertyNumber = propertyNumber();
+                boolean forRent = forRent();
+                double price = propertyPrice();
+                addPropertyToArray(address, roomNumber, price, type, forRent, propertyNumber, floorNumber, user);
+                succeed = true;
+                System.out.println(properties[0]);//*********************************
+            }
+        }else {
+            System.out.println("you have limit off only "+userPropertiesAmount+" properties to publish");
         }
         return succeed;
     }
@@ -291,5 +296,42 @@ public class RealEstate {
         }Property propertyToAdd=new Property(address,roomNumber,price,type,forRent,houseNumber,floorNumber,user);
         newPropertyArray[this.properties.length]=propertyToAdd;
         this.properties=newPropertyArray;
+    }
+    public void removeProperty(User user){
+        Scanner scanner=new Scanner(System.in);
+        boolean removeProperty=false;
+        int arrayLength=0;
+        for (int i=0;i<this.properties.length;i++) {
+            if (user.equals(properties[i].getUser())){
+                removeProperty=true;
+                arrayLength++;
+            }
+        }if (removeProperty){
+            int arrayIndex=0;
+            Property[] userProperties=new Property[arrayLength];
+            for (int i=0;i<this.properties.length;i++){
+                if (user.equals(properties[i].getUser())){
+                    userProperties[arrayIndex]=properties[i];
+                    arrayIndex++;
+                }
+            }int propertyToRemove=0;
+            while (propertyToRemove<1||propertyToRemove>userProperties.length-1) {
+                System.out.println("choose the property number to remove ");
+                for (int i = 0; i < userProperties.length; i++) {
+                    System.out.println(i + 1 + ":\n" + userProperties[i]);
+                }propertyToRemove= scanner.nextInt();
+            }userProperties[propertyToRemove]=null;
+            Property[] arrayAfterRemove=new Property[userProperties.length-1];
+            for (int i=0;i<userProperties.length;i++){
+                if (userProperties[i]==null){
+                    arrayAfterRemove[i]=userProperties[userProperties.length-1];
+                }else {
+                    arrayAfterRemove[i]=userProperties[i];
+                }
+            }this.properties=arrayAfterRemove;
+
+        }else {
+            System.out.println("this user dont have any property to remove");
+        }
     }
     }

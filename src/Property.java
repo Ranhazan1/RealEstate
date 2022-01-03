@@ -13,13 +13,10 @@ public class Property {
         this.address=address;
         this.roomNumber=roomNumber;
         this.price=price;
+        this.type=type;
         this.forRent=forRent;
         this.houseNumber=houseNumber;
-        if (this.type==1||this.type==2){
-            this.floorNumber=floorNumber;
-        }else {
-            this.floorNumber=-1;
-        }
+        this.floorNumber=floorNumber;
         this.user=user;
     }
 
@@ -92,9 +89,10 @@ public class Property {
         output.append("room number: ").append(this.roomNumber).append("\n");
         output.append("price: ").append(this.price).append("\n");
         if (this.type==1){
-            output.append("type: regular apartment in building ");
+            output.append("type: regular apartment in building \n");
+            output.append("floor number: ").append(floorNumber).append("\n");
         }else if (this.type==2){
-            output.append("type: penthouse");
+            output.append("type: penthouse \n");
         }else {
             output.append("type: private house").append("\n");
         }
