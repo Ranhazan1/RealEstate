@@ -12,13 +12,24 @@ public class Main {
             } else if (number == 2) {
                 User user = new User(null,null,null,false);
                 user = r1.login();
-                if (user != null) {
-                 number=printMenu2();
-                 if (number==1){
-                     r1.postNewProperty(user);
-                 }
+               do {
+                   if (user != null) {
+                       number=printMenu2();
+                       switch (number){
+                           case 1:
+                               r1.postNewProperty(user);
+                               break;
+                           case 2:
+                               r1.removeProperty(user);
+                               break;
+                           case 3:
+                               r1.printAllProperties();
+                               break;
 
-                }
+
+                       }
+                   }
+               }while (number!=6);
             } else {
                 break;
             }

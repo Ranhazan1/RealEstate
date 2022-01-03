@@ -99,7 +99,7 @@ public class Property {
         output.append("for rent: ").append(this.forRent).append("\n");
         output.append("house number: ").append(this.houseNumber).append("\n");
         output.append("address: ").append(this.address).append("\n");
-        if (type==1||type==2){
+        if (type==1){
             output.append("floor: ").append(this.floorNumber).append("\n");
         }
         output.append("user: ").append(this.user).append("\n");

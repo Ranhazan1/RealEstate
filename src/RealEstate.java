@@ -324,7 +324,7 @@ public class RealEstate {
             Property[] arrayAfterRemove=new Property[userProperties.length-1];
             for (int i=0;i<userProperties.length;i++){
                 if (userProperties[i]==null){
-                    arrayAfterRemove[i]=userProperties[userProperties.length-1];
+                    arrayAfterRemove[i]=userProperties[userProperties.length];
                 }else {
                     arrayAfterRemove[i]=userProperties[i];
                 }
@@ -332,6 +332,11 @@ public class RealEstate {
 
         }else {
             System.out.println("this user dont have any property to remove");
+        }
+    }
+    public void printAllProperties(){
+        for (int i=0;i<this.properties.length;i++){
+            System.out.println(i+1+ ": \n" +this.properties[i]);
         }
     }
     }
