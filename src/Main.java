@@ -25,8 +25,14 @@ public class Main {
                            case 3:
                                r1.printAllProperties();
                                break;
-
-
+                           case 4:
+                               r1.printUserProperties(user);
+                               break;
+                           case 5:
+                               r1.search();
+                               break;
+                           case 6:
+                               break;
                        }
                    }
                }while (number!=6);

@@ -6,41 +6,53 @@ public class User {
     private String phoneNumber;
     private boolean isRealEstate;
 
-    public User(String username,String password,String phoneNumber,boolean isRealEstate){
-        this.username=username;
-        this.password=password;
-        this.phoneNumber=phoneNumber;
-        this.isRealEstate=isRealEstate;
-        }
+    public User(String username, String password, String phoneNumber, boolean isRealEstate) {
+        this.username = username;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.isRealEstate = isRealEstate;
+    }
 
-    public String getUsername(){
+    public String getUsername() {
         return this.username;
     }
-    public void setUsername(String username){
-        this.username=username;
+
+    public void setUsername(String username) {
+        this.username = username;
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return this.password;
     }
-    public void setPassword(String password){
-        this.password=password;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
-    public String getPhoneNumber(){
+
+    public String getPhoneNumber() {
         return this.phoneNumber;
     }
-    public void setPhoneNumber(String phoneNumber){
-        this.phoneNumber=phoneNumber;
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
-    public boolean getIsRealEstate(){
+
+    public boolean getIsRealEstate() {
         return this.isRealEstate;
     }
-    public void setRealEstate(boolean realEstate){
-        this.isRealEstate=realEstate;
+
+    public void setRealEstate(boolean realEstate) {
+        this.isRealEstate = realEstate;
     }
-    public String toString(){
-        return "username: "+this.username+
-                "\npassword: "+this.password+
-                "\nphone number: "+this.phoneNumber+
-                "\nis real estate: "+this.isRealEstate;
+
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("username: ").append(this.username).append(" ").append(this.phoneNumber);
+        if (this.isRealEstate) {
+            output.append(" (real estate broker).");
+        } else {
+            output.append(" (not a real estate broker).");
+        }
+        return output.toString();
     }
 }

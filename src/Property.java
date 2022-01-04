@@ -85,24 +85,21 @@ public class Property {
     }
     public String toString(){
         StringBuilder output=new StringBuilder();
-        output.append("address: ").append(this.address).append("\n");
-        output.append("room number: ").append(this.roomNumber).append("\n");
-        output.append("price: ").append(this.price).append("\n");
         if (this.type==1){
-            output.append("type: regular apartment in building \n");
-            output.append("floor number: ").append(floorNumber).append("\n");
-        }else if (this.type==2){
-            output.append("type: penthouse \n");
+            output.append("regular apartment in building - ");
+        }else if(this.type==2){
+            output.append("penthouse - ");
         }else {
-            output.append("type: private house").append("\n");
-        }
-        output.append("for rent: ").append(this.forRent).append("\n");
-        output.append("house number: ").append(this.houseNumber).append("\n");
-        output.append("address: ").append(this.address).append("\n");
-        if (type==1){
-            output.append("floor: ").append(this.floorNumber).append("\n");
-        }
-        output.append("user: ").append(this.user).append("\n");
-        return output.toString();
+            output.append("private house - ");
+        }if (this.forRent){
+            output.append("for rent: ");
+        }else {
+            output.append("for sale: ");
+        }output.append(this.roomNumber).append(" rooms").append(",");
+        if (this.type==1){
+            output.append("floor ").append(this.floorNumber);
+        }output.append("\nprice: ").append(this.price).append("$.");
+        output.append("\ncontact info: ").append(this.user);
+     return output.toString();
     }
 }
