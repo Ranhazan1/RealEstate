@@ -509,9 +509,9 @@ public class RealEstate {
                 index++;
             }
         }
-        for (int i = 0; i < finalArray.length; i++) {
-            System.out.println(finalArray[i]);
-        }
+//        for (int i = 0; i < finalArray.length; i++) {
+//            System.out.println(finalArray[i]);
+//        }
 
         return finalArray;
     }
