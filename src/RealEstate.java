@@ -203,7 +203,7 @@ public class RealEstate {
         Scanner scanner = new Scanner(System.in);
         boolean cityExist = false;
         System.out.println("choose city: ");
-        String[] citiesToPrint = new String[10];
+        String[] citiesToPrint = new String[this.addresses.length];
         for (int i = 0; i < addresses.length; i++) {
             citiesToPrint[i] = addresses[i].getCity();
         }
@@ -241,29 +241,33 @@ public class RealEstate {
     public String printStreets(String city, Address[] addresses) {
         Scanner scanner = new Scanner(System.in);
         boolean streetExists = false;
-        System.out.println("choose street: ");
+        String userStreet=null;
         String[] newStreetsArray = new String[addresses.length];
-        for (int i = 0; i < newStreetsArray.length; i++) {
-            if (city.equals(addresses[i].getCity())) {
-                newStreetsArray[i] = addresses[i].getStreet();
+        if (city!=null) {
+            System.out.println("choose street: ");
+            for (int i = 0; i < newStreetsArray.length; i++) {
+                if (city.equals(addresses[i].getCity())) {
+                    newStreetsArray[i] = addresses[i].getStreet();
+                }
+            }
+            for (int i = 0; i < newStreetsArray.length; i++) {
+                if (newStreetsArray[i] != null) {
+                    System.out.println(newStreetsArray[i]);
+                }
+            }
+            userStreet = scanner.nextLine();
+            for (int i = 0; i < newStreetsArray.length; i++) {
+                if (userStreet.equals(newStreetsArray[i])) {
+                    streetExists = true;
+                    break;
+                }
+            }
+            if (!streetExists) {
+                System.out.println("the street " + userStreet + " dont exist in the system");
+                userStreet = null;
             }
         }
-        for (int i = 0; i < newStreetsArray.length; i++) {
-            if (newStreetsArray[i] != null) {
-                System.out.println(newStreetsArray[i]);
-            }
-        }
-        String userStreet = scanner.nextLine();
-        for (int i = 0; i < newStreetsArray.length; i++) {
-            if (userStreet.equals(newStreetsArray[i])) {
-                streetExists = true;
-                break;
-            }
-        }
-        if (!streetExists) {
-            System.out.println("the street " + userStreet + " dont exist in the system");
-            userStreet = null;
-        }
+
         return userStreet;
     }
 
